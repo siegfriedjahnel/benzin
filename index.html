@@ -1,0 +1,85 @@
+ <!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Benzin</title>
+<meta name="author" content="name">
+<meta name="description" content="description here">
+<meta name="keywords" content="keywords,here">
+</head>
+<style>
+    *{
+        margin: 0px;
+        padding: 0px;
+    }
+    body{
+        background-color: antiquewhite;
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+
+    }
+    .card{
+        padding:1rem;
+        margin: 1rem;
+        background-color: lightgray;
+        border-radius: 1rem;
+        border-style: solid;
+    }
+    #inputSorte{
+        background-color: bisque;
+        padding: 1rem;
+        display: flex;
+        justify-content: space-between;
+
+    }
+</style>
+<body>
+    <form id = "frmSorte">
+    <div id="inputSorte">
+            <span>Diesel<input type="radio" name="sorte" value="0" checked></span>
+            <span>E10<input type="radio" name="sorte" value="1"></span>
+            <span>Super<input type="radio" name="sorte" value="2"></span>
+        </div>
+    </form>
+<div id = "output"></div>
+</body>
+<script>
+    const url = "https://apim-p-gw02.adac.de/spritpreise/liste/48.26906316561424/12.580780816302246?UmkreisKm=25&PageSize=100&PageNumber=1&SortiereNach=Preis&SortierRichtung=asc";
+    const output = document.getElementById("output");
+    let what = "Diesel";
+
+    document.getElementById("frmSorte").addEventListener("change",ev=>{
+        let sortenIndex = document.querySelector('input[name="sorte"]:checked').value;
+        const sorten = ['Diesel', 'Super_E10', 'Super']
+        getData(sorten[sortenIndex]);
+    })
+    async function getData(what){
+        const endpoint = url+'&Sorte='+what;
+        
+        console.log(endpoint);
+        const response = await fetch(endpoint,{
+            method: 'GET',
+            headers:{
+                'Ocp-Apim-Subscription-Key': 'e9216740d3b64ae0bdaf6cff961afc1b'
+            }
+        })
+        const json = await response.json();
+        const tankstellen = json.Data.Tankstellen;
+        output.innerHTML="";
+        tankstellen.forEach(element => {
+            let name = element.Name;
+            let ort = element.Ort;
+            let strasse = element.Strasse;
+            let preis = element.Preis;
+            let sorte = element.Sorte;
+            let time = element.TimeSort;
+            let p = document.createElement("p");
+            p.classList.add("card");
+            p.innerHTML = `${name} ${ort}, ${strasse},<br><b> ${sorte}: ${preis}</b> -- Stand: ${time}Uhr`;
+            output.appendChild(p);
+
+        });
+    }
+    getData(what);
+    </script>
+</html>
