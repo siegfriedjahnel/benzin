@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Benzin</title>
+<meta name="author" content="name">
+<meta name="description" content="description here">
+<meta name="keywords" content="keywords,here">
+</head>
+<style>
+    *{
+        margin: 0px;
+        padding: 0px;
+    }
+    body{
+        background-color: antiquewhite;
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+
+    }
+    .card{
+        padding:1rem;
+        margin: 1rem;
+        background-color: lightgray;
+        border-radius: 1rem;
+        border-style: solid;
+    }
+    #inputSorte{
+        background-color: bisque;
+        padding: 1rem;
+        display: flex;
+        justify-content: space-between;
+
+    }
+</style>
+<body>
+    <form id = "frmSorte">
+    <div id="inputSorte">
+            <span>Diesel<input type="radio" name="sorte" value="0" checked></span>
+            <span>E10<input type="radio" name="sorte" value="1"></span>
+            <span>Super<input type="radio" name="sorte" value="2"></span>
+        </div>
+    </form>
+<div id = "output"></div>
+</body>
+<script>
+
+const url = "https://www.tank-monitor.de/mapsearch/20/84513";
+const endpoint =`https://api.allorigins.win/get?url=${encodeURIComponent(url)}`;
+
+
+    const output = document.getElementById("output");
+    let what = "Diesel";
+
+    
+    async function getData(){
+        //const endpoint = url;
+        
+        const response = await fetch(endpoint);
+        const json = await response.json();
+        const data = json.contents;
+        const tankstellen = JSON.parse(data);
+        console.log(tankstellen);
+        output.innerHTML="";
+        tankstellen.forEach(element => {
+            let name = element.name;
+            let ort = element.city;
+            let strasse = element.street;
+            let preis_diesel = element.price_diesel;
+            let time = element.last_update_formatted;
+            let p = document.createElement("p");
+            p.classList.add("card");
+            p.innerHTML = `${name} ${ort},${strasse}<br><b>  Diesel: ${preis_diesel}</b> -- Stand: ${time}Uhr`;
+            output.appendChild(p);
+
+        });
+    }
+    getData();
+    </script>
+</html>

@@ -1,0 +1,128 @@
+https://sprit.me/visibleStations.php?bounds=%7B%22south%22%3A48.21748637541953%2C%22west%22%3A12.540513301269547%2C%22north%22%3A48.31176195211249%2C%22east%22%3A12.624970698730484%7D&origin=%7B%22lat%22%3A48.2646459%2C%22lng%22%3A12.582742%7D
+
+https://sprit.me/visibleStations.php?bounds={"south":48.21748637541
+https://sprit.me/visibleStations.php?bounds={"south":48.21748637541953,"west":12.540513301269547,"north":48.31176195211249,"east":12.624970698730484}&origin={"lat":48.2646459,"lng":12.582742}
+
+https://sprit.me/visibleStations.php?origin={"lat":48.2646459,"lng":12.582742}
+
+48,21748637541953
+12,540513301269547
+48,31176195211249
+12,624970698730484
+
+---------------
+basis
+48,2646459
+12,582742
+---------------
+1Laengengrad(50) = 75km
+1Breitengrad = 111km 
+
+"results": [
+{
+"stid": "00060654-0001-4444-8888-acdc00000001",
+"name": "Tankstelle Rieger Töging",
+"brand": "",
+"lat": 48.2570381,
+"lng": 12.5931931,
+"fueltypes": [
+"E5",
+"Diesel"
+],
+"prices": {
+"E5": 2199,
+"Diesel": 2249
+},
+"added": "2022-03-18 05:55:09",
+"elapsed_ms": 444858000,
+"open": true,
+"hours_found": 2,
+"overwrites_open_active": false,
+"overwrites_closed_active": false,
+"region": "germany",
+"logo": "img/logos/alternative.png",
+"hide_nullOpening": true,
+"distance": 1.15
+},
+
+https://www.tanke-voll.de/grid.php?ORToperator=and&filtervalue0=84513&filtercondition0=CONTAINS&filteroperator0=0&filterdatafield0=ORT&filterscount=1
+&groupscount=0&sortdatafield=E5&sortorder=asc&pagenum=0&pagesize=20&recordstartindex=0&recordendindex=20&_=1648038623368
+
+Rows: [{ID: "d37f1837-e3ff-4e7b-901d-eacc6cc1b9a3", NAME: "24 TotalEnergies Autohof MÃ¼hldorf Nord",…},…]
+0: {ID: "d37f1837-e3ff-4e7b-901d-eacc6cc1b9a3", NAME: "24 TotalEnergies Autohof MÃ¼hldorf Nord",…}
+AENDERUNG: []
+DIESEL: "2.239"
+DIESEL_SEIT: "18.03 10:28"
+E5: "2.129"
+E5_SEIT: "18.03 10:28"
+E10: "2.069"
+E10_SEIT: "18.03 10:28"
+GESCHLOSSEN: false
+HAUSNR: "3"
+ID: "d37f1837-e3ff-4e7b-901d-eacc6cc1b9a3"
+MARKE: "TotalEnergies"
+NAME: "24 TotalEnergies Autohof MÃ¼hldorf Nord"
+NORDWERT: "48.2729"
+OEFFNUNGSZEIT: [{TAG: "Montag-Sonntag", OEFFNET: ["00:00"], SCHLIESST: ["00:00"]},…]
+ORT: "Erharting"
+OSTWERT: "12.5505"
+PLZ: "84513"
+STRASSE: "Autohof Gewerbepark Frixing"
+ZEITPUNKT: "2022-02-17 14:43:46"
+----------------------
+
+https://sprit.club/_ah/api/spritclub/v1/getGasstations?lat=48.26465&lng=12.58274
+https://sprit.club/_ah/api/spritclub/v1/getGasstations?lat=48.19906&lng=12.35203
+
+
+0: {id: "B25178ED-E3B5-48F9-971B-464CBC48C1C5", name: "Breintner Tankstellen GmbH", latitude: 48.35575,…}
+address: "Bahnhofstr.  65"
+automat: false
+city: "Neumarkt St. Veit"
+id: "B25178ED-E3B5-48F9-971B-464CBC48C1C5"
+lastUpdate: "2022-03-23T12:44:43.958Z"
+latitude: 48.35575
+longitude: 12.49667
+name: "Breintner Tankstellen GmbH"
+openingHours: [{begin: "06:00", end: "21:00", day: 1, dayLabel: "Montag"},…]
+postalCode: "84494"
+prices: {SUP: {gasType: "SUP", price: 2.1089999675750732}, E10: {gasType: "E10", price: 2.0490000247955322},…}
+DIE: {gasType: "DIE", price: 2.1489999294281006}
+E10: {gasType: "E10", price: 2.0490000247955322}
+SUP: {gasType: "SUP", price: 2.1089999675750732}
+service: false
+
+--------------------
+
+https://www.tank-monitor.de/mapsearch/3/84513
+https://www.tank-monitor.de/mapsearch/20/84513
+https://www.tank-monitor.de/mapsearch/20/84513
+
+: {station_id: "1392109", identifier_id: "G-2018-1", identifier_name: "DE-MDM-Tankstelle Klaus Maier",…}
+brand: "Frei"
+city: "Töging"
+create_date: "2018-04-14 02:00:06"
+distance: "0.5"
+house_number: "28"
+identifier_id: "G-2018-1"
+identifier_name: "DE-MDM-Tankstelle Klaus Maier"
+last_modified_date: "2018-04-13 10:19:08"
+last_update: "2022-03-21 08:21:01"
+last_update_formatted: "21.03.2022, 08:21"
+latitude: "48.260368"
+longitude: "12.584696"
+name: "Tankstelle Klaus Maier"
+openingTimes: ["00:00 - 00:00 Uhr", "00:00 - 00:00 Uhr", "00:00 - 00:00 Uhr", "00:00 - 00:00 Uhr",…]
+postal_code: "84513"
+price_diesel: "2.199"
+price_diesel_formatted: "2.19<sup>9</sup>€"
+price_e5: "2.139"
+price_e5_formatted: "2.13<sup>9</sup>€"
+price_e10: null
+price_e10_formatted: "0.00<sup>0</sup>€"
+station_id: "1392109"
+street: "Erhartinger Straße"
+updated: "1"
+uuid: "00060942-3E53-4444-8888-ACDC00000001"
+uuid_original: "00060942-3E53-4444-8888-ACDC00000001"
+version: "1"
