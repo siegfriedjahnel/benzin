@@ -44,7 +44,9 @@
 <div id = "output"></div>
 </body>
 <script>
-    const url = "https://apim-p-gw02.adac.de/spritpreise/liste/48.26906316561424/12.580780816302246?UmkreisKm=25&PageSize=100&PageNumber=1&SortiereNach=Preis&SortierRichtung=asc";
+    
+    //const url = "https://apim-p-gw02.adac.de/spritpreise/liste/48.26906316561424/12.580780816302246?UmkreisKm=25&PageSize=100&PageNumber=1&SortiereNach=Preis&SortierRichtung=asc";
+    const url = "https://sj-sam.de/api/benzin/adac.php";
     const output = document.getElementById("output");
     let what = "Diesel";
 
@@ -54,28 +56,28 @@
         getData(sorten[sortenIndex]);
     })
     async function getData(what){
-        const endpoint = url+'&Sorte='+what;
-        
-        console.log(endpoint);
-        const response = await fetch(endpoint,{
-            method: 'GET',
-            headers:{
-                'Ocp-Apim-Subscription-Key': 'e9216740d3b64ae0bdaf6cff961afc1b'
-            }
-        })
+        output.innerHTML = "loading, please wait";
+        const endpoint = url+'?Sorte='+what;
+        const response = await fetch(endpoint);
         const json = await response.json();
         const tankstellen = json.Data.Tankstellen;
         output.innerHTML="";
+        //---order by Preis desc------asc is default--------
+        // tankstellen.sort(function(a,b){
+        //     return b.Preis - a.Preis;
+        // })
+        //----------------------------------
         tankstellen.forEach(element => {
             let name = element.Name;
             let ort = element.Ort;
             let strasse = element.Strasse;
             let preis = element.Preis;
             let sorte = element.Sorte;
-            let time = element.TimeSort;
+            let time = element.TimeSort.substring(0,5);
+            let datum = element.Datum;
             let p = document.createElement("p");
             p.classList.add("card");
-            p.innerHTML = `${name} ${ort}, ${strasse},<br><b> ${sorte}: ${preis}</b> -- Stand: ${time}Uhr`;
+            p.innerHTML = `${name} <br>${ort}, ${strasse},<br><b> ${sorte}: ${preis}</b> <br> Stand: ${datum}, ${time}Uhr`;
             output.appendChild(p);
 
         });
