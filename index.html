@@ -41,27 +41,34 @@
             <span>Super<input type="radio" name="sorte" value="2"></span>
         </div>
     </form>
-<div id = "output"></div>
+<div id = "output1"></div>
+<div id = "output2"></div>
 </body>
 <script>
     
     //const url = "https://apim-p-gw02.adac.de/spritpreise/liste/48.26906316561424/12.580780816302246?UmkreisKm=25&PageSize=100&PageNumber=1&SortiereNach=Preis&SortierRichtung=asc";
-    const url = "https://sj-sam.de/api/benzin/adac.php";
-    const output = document.getElementById("output");
+    const output1 = document.getElementById("output1");
+    const output2 = document.getElementById("output2");
     let what = "Diesel";
+    let sortenIndex = document.querySelector('input[name="sorte"]:checked').value;
+    const sortenApi1 = ['Diesel', 'Super_E10', 'Super'];
+    const sortenApi2 = ['DIE', 'SUP', 'SUP'];
 
     document.getElementById("frmSorte").addEventListener("change",ev=>{
-        let sortenIndex = document.querySelector('input[name="sorte"]:checked').value;
-        const sorten = ['Diesel', 'Super_E10', 'Super']
-        getData(sorten[sortenIndex]);
+      sortenIndex = document.querySelector('input[name="sorte"]:checked').value;
+
+      getData(sortenApi1[sortenIndex]);
+      getBraunau(sortenApi2[sortenIndex]);
     })
+    
     async function getData(what){
-        output.innerHTML = "loading, please wait";
+      output1.innerHTML = "loading, please wait";
+      const url = "https://sj-sam.de/api/benzin/adac.php";
         const endpoint = url+'?Sorte='+what;
         const response = await fetch(endpoint);
         const json = await response.json();
         const tankstellen = json.Data.Tankstellen;
-        output.innerHTML="";
+        output1.innerHTML="";
         //---order by Preis desc------asc is default--------
         // tankstellen.sort(function(a,b){
         //     return b.Preis - a.Preis;
@@ -78,10 +85,33 @@
             let p = document.createElement("p");
             p.classList.add("card");
             p.innerHTML = `${name} <br>${ort}, ${strasse},<br><b> ${sorte}: ${preis}</b> <br> Stand: ${datum}, ${time}Uhr`;
-            output.appendChild(p);
+            output1.appendChild(p);
 
         });
     }
-    getData(what);
+
+    async function getBraunau(what){
+      const url = `https://api.e-control.at/sprit/1.0/search/gas-stations/by-address?latitude=48.092431&longitude=13.287927&fuelType=${what}&includeClosed=false`;
+      const response = await fetch(url);
+      const tankstellen = await response.json();
+      output2.innerHTML="";
+        for (let i = 0; i <= 4; i++) {
+          const element = tankstellen[i];
+        const name = element.name;
+        const ort = element.location.city;
+        const strasse = element.location.address;
+        const time = "";
+        const datum = "";
+        const sorte = element.prices[0].label;
+        const preis = element.prices[0].amount;
+        let p = document.createElement("p");
+            p.classList.add("card");
+            p.innerHTML = `${name} <br>${ort}, ${strasse},<br><b> ${sorte}: ${preis}</b> <br> Stand: ${datum}, ${time}Uhr`;
+            output2.appendChild(p);
+
+      }
+    }
+    getData(sortenApi1[sortenIndex]);
+      getBraunau(sortenApi2[sortenIndex]);
     </script>
 </html>
