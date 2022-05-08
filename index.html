@@ -91,7 +91,7 @@
     }
 
     async function getBraunau(what){
-      const url = `https://api.e-control.at/sprit/1.0/search/gas-stations/by-address?latitude=48.092431&longitude=13.287927&fuelType=${what}&includeClosed=false`;
+      const url = `https://api.e-control.at/sprit/1.0/search/gas-stations/by-address?latitude=48.3439454&longitude=13.287927&fuelType=${what}&includeClosed=false`;
       const response = await fetch(url);
       const tankstellen = await response.json();
       output2.innerHTML="";
