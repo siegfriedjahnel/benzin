@@ -45,52 +45,57 @@
 <div id = "output2"></div>
 </body>
 <script>
+  
+  const output1 = document.getElementById("output1");
+  const output2 = document.getElementById("output2");
+  let what = "Diesel";
+  let sortenIndex = document.querySelector('input[name="sorte"]:checked').value;
+  const sortenApi1 = ['diesel', 'e10', 'e5'];
+  const sortenApi2 = ['DIE', '', 'SUP'];
+  
+  document.getElementById("frmSorte").addEventListener("change",ev=>{
+    sortenIndex = document.querySelector('input[name="sorte"]:checked').value;
     
-    //const url = "https://apim-p-gw02.adac.de/spritpreise/liste/48.26906316561424/12.580780816302246?UmkreisKm=25&PageSize=100&PageNumber=1&SortiereNach=Preis&SortierRichtung=asc";
-    const output1 = document.getElementById("output1");
-    const output2 = document.getElementById("output2");
-    let what = "Diesel";
-    let sortenIndex = document.querySelector('input[name="sorte"]:checked').value;
-    const sortenApi1 = ['Diesel', 'Super_E10', 'Super'];
-    const sortenApi2 = ['DIE', 'SUP', 'SUP'];
-
-    document.getElementById("frmSorte").addEventListener("change",ev=>{
-      sortenIndex = document.querySelector('input[name="sorte"]:checked').value;
-
-      getData(sortenApi1[sortenIndex]);
-      getBraunau(sortenApi2[sortenIndex]);
-    })
+    getData(sortenApi1[sortenIndex]);
+    getBraunau(sortenApi2[sortenIndex]);
+  })
+  
+  async function getData(type){
+    output1.innerHTML="";
+    output1.innerHTML = "loading, please wait";
     
-    async function getData(what){
-      output1.innerHTML = "loading, please wait";
-      const url = "https://sj-sam.de/api/benzin/adac.php";
-        const endpoint = url+'?Sorte='+what;
+    const endpoint = `https://creativecommons.tankerkoenig.de/json/list.php?lat=48.260&lng=12.584&rad=5&sort=dist&type=${type}&apikey=82318f49-69d4-1d01-9654-832306214cb2`;
         const response = await fetch(endpoint);
         const json = await response.json();
-        const tankstellen = json.Data.Tankstellen;
-        output1.innerHTML="";
+        const tankstellen = json.stations;
         //---order by Preis desc------asc is default--------
         // tankstellen.sort(function(a,b){
         //     return b.Preis - a.Preis;
         // })
+        output1.innerHTML="";
         //----------------------------------
         tankstellen.forEach(element => {
-            let name = element.Name;
-            let ort = element.Ort;
-            let strasse = element.Strasse;
-            let preis = element.Preis;
-            let sorte = element.Sorte;
-            let time = element.TimeSort.substring(0,5);
-            let datum = element.Datum;
-            let p = document.createElement("p");
-            p.classList.add("card");
-            p.innerHTML = `${name} <br>${ort}, ${strasse},<br><b> ${sorte}: ${preis}</b> <br> Stand: ${datum}, ${time}Uhr`;
-            output1.appendChild(p);
+            let name = element.name;
+            let ort = element.place;
+            let strasse = element.street;
+            let preis = element.price;
+            let sorte = type.toUpperCase();
+            if(element.price){
+              let p = document.createElement("p"); 
+              p.classList.add("card");
+              p.innerHTML = `${name} <br>${ort}, ${strasse},<br><b> ${sorte}: ${preis}</b>`;
+              output1.appendChild(p);
+            }
 
         });
     }
 
     async function getBraunau(what){
+      output2.innerHTML="";
+      if(what == ''){
+        return;
+      }
+      output2.innerHTML = "loading, please wait";
       const url = `https://api.e-control.at/sprit/1.0/search/gas-stations/by-address?latitude=48.3439454&longitude=13.031362&fuelType=${what}&includeClosed=false`;
       const response = await fetch(url);
       const tankstellen = await response.json();
@@ -105,8 +110,8 @@
         const sorte = element.prices[0].label;
         const preis = element.prices[0].amount;
         let p = document.createElement("p");
-            p.classList.add("card");
-            p.innerHTML = `${name} <br>${ort}, ${strasse},<br><b> ${sorte}: ${preis}</b> <br> Stand: ${datum}, ${time}Uhr`;
+        p.classList.add("card");
+            p.innerHTML = `${name} <br>${ort}, ${strasse},<br><b> ${sorte}: ${preis}</b>`;
             output2.appendChild(p);
 
       }
