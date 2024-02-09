@@ -64,7 +64,7 @@
     output1.innerHTML="";
     output1.innerHTML = "loading, please wait";
     
-    const endpoint = `https://creativecommons.tankerkoenig.de/json/list.php?lat=48.260&lng=12.584&rad=5&sort=dist&type=${type}&apikey=82318f49-69d4-1d01-9654-832306214cb2`;
+    const endpoint = `https://creativecommons.tankerkoenig.de/json/list.php?lat=48.260&lng=12.584&rad=5&sort=price&type=${type}&apikey=82318f49-69d4-1d01-9654-832306214cb2`;
         const response = await fetch(endpoint);
         const json = await response.json();
         const tankstellen = json.stations;
